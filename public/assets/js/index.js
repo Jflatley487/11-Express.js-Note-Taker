@@ -69,6 +69,7 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
+  console.log('Save button clicked');
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
@@ -77,6 +78,7 @@ const handleNoteSave = () => {
     getAndRenderNotes();
     renderActiveNote();
   });
+  console.log('Save button click handler finsihed');
 };
 
 // Delete the clicked note
