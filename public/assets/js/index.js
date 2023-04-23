@@ -4,6 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -64,6 +65,7 @@ const renderActiveNote = () => {
     noteTitle.value = '';
     noteText.value = '';
   }
+  handleRenderSaveBtn();
 };
 
 const handleNoteSave = () => {
@@ -109,12 +111,14 @@ const handleNewNoteView = (e) => {
 };
 
 const handleRenderSaveBtn = () => {
-  if (!noteTitle.value.trim() || !noteText.value.trim()) {
-    hide(saveNoteBtn);
+  if (noteTitle.hasAttribute('readonly') || noteText.hasAttribute('readonly')) {
+    saveNoteBtn.style.display = 'none';
   } else {
-    show(saveNoteBtn);
+    saveNoteBtn.style.display = 'inline';
   }
 };
+
+
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
@@ -180,4 +184,7 @@ if (window.location.pathname === '/notes') {
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
+
+
 getAndRenderNotes();
+
