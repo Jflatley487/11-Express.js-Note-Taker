@@ -23,9 +23,9 @@ app.get('*', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-//Define get route to read db.json file and return saved notes
+//Define get route to read notes.json file and return saved notes
 app.get('/api/notes', (req, res) => {
-    fs.readFile('db.json', 'utf8', (err, data) => {
+    fs.readFile('db/notes.json', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             return res.status(500).end();
@@ -34,18 +34,18 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
-//Define the POST route to receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client:
+//Define the POST route to receive a new note to save on the request body, add it to the notes.json file, and then return the new note to the client:
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = uuidv4();
-    fs.readFile('db.json', 'utf8', (err, data) => {
+    fs.readFile('db/notes.json', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             return res.status(500).end();
         }
         const notes = JSON.parse(data);
         notes.push(newNote);
-        fs.writeFile('db.json', JSON.stringify(notes), err => {
+        fs.writeFile('db/notes.json', JSON.stringify(notes), err => {
             if (err) {
                 console.error(err);
                 return res.status(500).end();
