@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 //middleware to parse JSON requests
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //middleware to serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
